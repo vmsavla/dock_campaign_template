@@ -7,6 +7,11 @@ if [ -z ${DOCKBASE+x} ]; then
     echo "ERROR: Please run 'source setup_dock_environment.sh' in the project root directory"
 fi
 
+if [ -z ${DOCK_TEMPLATE+x} ]; then
+    echo "ERROR: The \${DOCK_TEMPLATE} variable is not set"
+    echo "ERROR: Please run 'source setup_dock_environment.sh' in the project root directory"
+fi
+
 
 
 # populate substances.smi having columns <smiles> <substance_id>
@@ -32,7 +37,7 @@ do
   pushd $substance/0
   rm output.*.*
   rm ring_count
-  time python ../../../../scripts/omega_db2.e.py \
+  time python ${DOCK_TEMPLATE}/scripts/omega_db2.e.py \
     --fixrms 0.01 \
     --rms 0.001 \
     --ewindow 100 \
@@ -50,7 +55,7 @@ do
 echo "build conformations as rigid elements into .db2 files for substance $substance"
 rm -rf ${substance}_rigid
 rm -rf ${substance}_rigid.db2.gz
-bash ../../scripts/build_smiles_ligand_rigid.sh \
+bash ${DOCK_TEMPLATE}/scripts/build_smiles_ligand_rigid.sh \
   ${substance}/0 \
   ${substance}_rigid
 done

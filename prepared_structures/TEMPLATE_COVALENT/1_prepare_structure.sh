@@ -17,7 +17,7 @@ echo "   residue nubmer: ${COVALENT_RESIDUE_NUMBER}"
 echo "   residue name:   ${COVALENT_RESIDUE_NAME}"
 echo "   covalent atoms:  ${COVALENT_RESIDUE_ATOMS}"
 
-source ${DOCK_TEPLATE}/scripts/dock_clean.sh
+source ${DOCK_TEMPLATE}/scripts/dock_clean.sh
 
 echo 'Preparing receptor and xtal-lig ...'
 cp ${STRUCTURE}/rec.pdb rec.pdb

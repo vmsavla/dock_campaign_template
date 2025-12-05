@@ -23,9 +23,9 @@ fi
 
 
 pushd dockfiles
-python ${DOCK_TEMPLATE}/scripts/create_VDW_DX.py
+python2 ${DOCK_TEMPLATE}/scripts/create_VDW_DX.py
 python ${DOCK_TEMPLATE}/scripts/phi_to_dx.py trim.electrostatics.phi trim.electrostatics.dx
-python ${DOCK_TEMPLATE}/scripts/create_LigDeSolv_DX.py
+python2 ${DOCK_TEMPLATE}/scripts/create_LigDeSolv_DX.py
 popd
 
 echo "generated the following grids:" 

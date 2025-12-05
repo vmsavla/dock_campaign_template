@@ -12,6 +12,7 @@
 export CLUSTER_TYPE=
 
 # use these options for SLURM clusters
+#export USE_SLURM=true
 #export SLURM_ACCOUNT=
 #export SLURM_MAIL_USER=
 #export SLURM_MAIL_TYPE=BEGIN,END
@@ -20,6 +21,7 @@ export CLUSTER_TYPE=
 export SCRATCH_DIR=
 export DOCK_TEMPLATE=${HOME}/opt/dock_campaign_template
 
+export DOCK_VERSION=3.8
 export DOCKBASE=${HOME}/opt/DOCK/ucsfdock
 # the DOCKBASE folder should contain files and folders that look like this:
 # analysis, bin, common, docking, install, ligand protein, files.py, util.py, __init__.py

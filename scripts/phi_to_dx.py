@@ -36,11 +36,11 @@ class phi(object):
           if not is64:
             (temptop,) = struct.unpack('16s', phiFile.read(16))
             self.toplabel = check + temptop
-	    #print(self.toplabel)
+            #print(self.toplabel)
           else:
             (temptop,) = struct.unpack('20s', phiFile.read(20))
             self.toplabel = temptop
-	    #print(self.toplabel)
+            #print(self.toplabel)
           #print "toplabel:", self.toplabel
           junk = struct.unpack('8s', phiFile.read(8))
           if is64:
@@ -94,10 +94,10 @@ class phi(object):
   #def get_oldmid(self)
 
   def get_phi_values(self):
-	phi_list = []
-	for phi in self.phiArray:
-		phi_list.append(float(phi))
-	return phi_list
+      phi_list = []
+      for phi in self.phiArray:
+          phi_list.append(float(phi))
+      return phi_list
 
 def write_out_dx_file(file,xn,yn,zn,dx,dy,dz,origin,values):
 
@@ -144,7 +144,7 @@ def write_out_dx_file(file,xn,yn,zn,dx,dy,dz,origin,values):
 
 def construct_box(dx_file_name, origin, spacing, gridSize, phi_list):
 
-	matrix = []
+        matrix = []
         for x in range(gridSize):
                y_list = []
                for y in range(gridSize):
@@ -154,28 +154,28 @@ def construct_box(dx_file_name, origin, spacing, gridSize, phi_list):
                        y_list.append(z_list)
                matrix.append(y_list)
 
-	index = 0
-	for i in range(gridSize):
-		for j in range(gridSize):
-			for k in range(gridSize):
-				matrix[i][j][k] = phi_list[index]
-				index += 1
-	#print(matrix)
+        index = 0
+        for i in range(gridSize):
+                for j in range(gridSize):
+                        for k in range(gridSize):
+                                matrix[i][j][k] = phi_list[index]
+                                index += 1
+        #print(matrix)
 
 
-	write_out_list = []
-	
-	for k in range(gridSize):
-		for j in range(gridSize):
-			for i in range(gridSize):
-				write_out_list.append(matrix[i][j][k])	
+        write_out_list = []
+        
+        for k in range(gridSize):
+                for j in range(gridSize):
+                        for i in range(gridSize):
+                                write_out_list.append(matrix[i][j][k])
 
 
-	dx = spacing[0]
-	dy = spacing[1]
-	dz = spacing[2]
+        dx = spacing[0]
+        dy = spacing[1]
+        dz = spacing[2]
 
-	write_out_dx_file(dx_file_name,gridSize,gridSize,gridSize,dx,dy,dz,origin,write_out_list)
+        write_out_dx_file(dx_file_name,gridSize,gridSize,gridSize,dx,dy,dz,origin,write_out_list)
 
 
 def calculate_box_parameters(scale, oldmid, gridSize):
@@ -199,23 +199,23 @@ def calculate_box_parameters(scale, oldmid, gridSize):
 
 def determine_grid_size(input_phi_file):
 
-	file_size = os.path.getsize(input_phi_file)
-	grid_bytes = file_size - 162  # 162 is number of fixed bytes in a grid file
-	grid_points = grid_bytes / 4  # 4 bytes per float
-	grid_size = grid_points ** (1.0/3.0)  # Cube root of grid points is size
-	return int(grid_size+1)
+        file_size = os.path.getsize(input_phi_file)
+        grid_bytes = file_size - 162  # 162 is number of fixed bytes in a grid file
+        grid_points = grid_bytes / 4  # 4 bytes per float
+        grid_size = grid_points ** (1.0/3.0)  # Cube root of grid points is size
+        return int(grid_size+1)
 
 
 def main():
-	dx_file_name = sys.argv[2]
-	phiSize = determine_grid_size(sys.argv[1])
-	print(phiSize)
-	phiData = phi(sys.argv[1], gridSizes=(phiSize,))
-	scale, oldmid, gridSize = phiData.get_stuff()
-	phi_list = phiData.get_phi_values()
+        dx_file_name = sys.argv[2]
+        phiSize = determine_grid_size(sys.argv[1])
+        print(phiSize)
+        phiData = phi(sys.argv[1], gridSizes=(phiSize,))
+        scale, oldmid, gridSize = phiData.get_stuff()
+        phi_list = phiData.get_phi_values()
 
-	origin, spacing = calculate_box_parameters(scale, oldmid, gridSize)
+        origin, spacing = calculate_box_parameters(scale, oldmid, gridSize)
 
-	construct_box(dx_file_name, origin, spacing, gridSize, phi_list)
+        construct_box(dx_file_name, origin, spacing, gridSize, phi_list)
 
 main()
