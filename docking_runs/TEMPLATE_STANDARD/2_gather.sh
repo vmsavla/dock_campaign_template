@@ -9,8 +9,8 @@ fi
 echo "Gather dock results ..."
 ls results/ | grep -v joblist | sed "s#^#results/#" > dirlist
 python ${DOCKBASE}/analysis/extract_all_blazing_fast.py dirlist extract_all.txt 10
-python ${DOCKBASE}/analysis/getposes_blazing_faster.py '' extract_all.sort.uniq.txt 500 poses.mol2 test.mol2.gz 
+python ${DOCKBASE}/analysis/getposes_blazing_faster_py3.py '' extract_all.sort.uniq.txt 500 poses.mol2 test.mol2.gz.0 
 
-source ${DOCK_TEMPLATE}/scripts/dock_statistics.sh
+#source ${DOCK_TEMPLATE}/scripts/dock_statistics.sh
 
-Rscript ${DOCK_TEMPLATE}/scripts/analysis/gather_pose_features.R --verbose
+#Rscript ${DOCK_TEMPLATE}/scripts/analysis/gather_pose_features.R --verbose
