@@ -456,15 +456,15 @@ docking_run () {
     echo "Next steps:"
     echo ""
     echo "  pushd ${docking_run_path}"
-    echo "  # edit 1_run.sh"
+    echo "  # edit 1_submit.sh"
     echo "  ./1_submit.sh"
     echo "  # wait till job is done"
-    echo "  ./1_gather.sh"
+    echo "  ./2_gather.sh"
     echo "  popd"
     echo ""
     echo "Then for the final results check"
     echo ""
-    echo "  product/$(basename ${docking_run_path})"
+    echo "  $(basename ${docking_run_path})"
     echo ""
 }
 
